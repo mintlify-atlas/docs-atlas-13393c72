@@ -1,0 +1,73 @@
+---
+title: "BYOD: Bring Your Own Domain for Titanium Network"
+sidebarTitle: "BYOD"
+description: "Use Titanium Network's BYOD (Bring Your Own Domain) service to point a custom domain at Titanium Network's proxy servers without running your own hosting infrastructure."
+---
+
+Titanium Network's **BYOD (Bring Your Own Domain)** program lets you point a domain or subdomain you control directly at their proxy infrastructure — no server setup, no deployment pipeline, no maintenance. You simply update a DNS record in whatever registrar or DNS manager you use, wait for propagation, and your domain becomes a working proxy front-end for whichever Titanium Network partner service you choose. This is the fastest way to get a fresh, unblocked proxy URL without any hosting costs.
+
+## Setting Up BYOD
+
+<Steps>
+  <Step title="Log in to your DNS manager">
+    Open the control panel for whichever service manages DNS for your domain — Cloudflare, Porkbun, Namecheap, or any other registrar that gives you access to DNS records.
+  </Step>
+  <Step title="Create an A record pointing to the main BYOD IP">
+    Add a new **A record** for the domain or subdomain you want to use and set the destination to the main Titanium Network BYOD IP address:
+
+    ```text
+    149.56.128.250
+    ```
+
+    If you want to use a specific partner service instead, find its dedicated IP in the table below and point your record there.
+  </Step>
+  <Step title="Wait for DNS propagation">
+    DNS changes typically take a few minutes to propagate, though it can occasionally take longer depending on your registrar and TTL settings.
+  </Step>
+  <Step title="Visit your domain and select a service">
+    Once propagation is complete, navigate to your domain in a browser. You should see a Titanium Network landing page where you can choose which proxy service to bind your domain to.
+  </Step>
+  <Step title="Set SSL/TLS to Full">
+    If you are proxying your domain through Cloudflare, go to **SSL/TLS → Overview** and set the encryption mode to **Full** — not Flexible. Using Flexible can cause redirect loops with the origin server.
+  </Step>
+</Steps>
+
+<Info>
+  Titanium Network is the organization behind many of the most popular Chromebook unblocker projects. Learn more at [https://titaniumnetwork.org/](https://titaniumnetwork.org/) or join their community on Discord at **discord.gg/unblock**.
+</Info>
+
+<Tip>
+  To get a domain for BYOD without spending much, check out [Porkbun](https://porkbun.com/) or [Namecheap](https://www.namecheap.com/) — both frequently have `.xyz`, `.click`, and other TLDs for under $1–$2 for the first year. A fresh domain that your school has never seen is far less likely to be blocked than a well-known subdomain.
+</Tip>
+
+## Per-Service BYOD IP Addresses
+
+Each Titanium Network partner service has its own dedicated IP address. Point your A record at the IP for the specific service you want, or use the main IP (`149.56.128.250`) to choose at binding time.
+
+| Service | BYOD IP Address |
+|---|---|
+| **Main / Holy Unblocker** | `149.56.128.250` |
+| 1key | `151.80.60.23` |
+| Axiom | `93.95.228.17` and `89.127.232.1` |
+| Axis | `185.193.67.216` |
+| Boredom | `158.69.222.114` |
+| Bromine | `5.188.124.52` (or `129.153.136.235`) |
+| CanLite | `104.36.85.249` |
+| Cherri | `5.188.124.65` |
+| DogeUB | `15.204.230.53` |
+| Endis | `144.217.77.9` |
+| Fern | `92.38.177.17` |
+| Frogie's Arcade | `69.164.251.210` |
+| Galaxy | `40.160.3.200` |
+| Glint | `5.188.124.13` |
+| Krypton | `185.230.219.5` |
+| PeteZah | `51.222.141.36` |
+| Platinum Network | `51.91.158.192` |
+| Red's Exploit Corner | `152.53.37.155` |
+| Truffled | `205.209.125.106` |
+| UniUB | `69.10.52.218` |
+| Velara | `152.53.83.13` |
+
+<Note>
+  Several services are currently unavailable for BYOD. The following have no IP listed (`-`), are invite-only, or have paused onboarding: 1346lol, BrunysIXLWork, DEMON, DotGUI, Jordan's Math Work, Neo, NettleWeb (WhiteSpider), Nexora, Quasar, Shadow, Shuttle, UBX, Vapor (invites paused), Vertex Gold, Waves, Wilway (invites paused). Services marked `/` (Nebulo, Overcloaked, Utopia) use a different routing method — check their individual pages for setup details. Interstellar is listed as banned.
+</Note>

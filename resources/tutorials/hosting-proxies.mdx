@@ -1,0 +1,91 @@
+---
+title: "Host Your Own Proxy with Vercel or FreeDNS"
+sidebarTitle: "Hosting Proxies"
+description: "Step-by-step guide to deploying your own web proxy or unblocker using Vercel's one-click clone deployment and FreeDNS for custom domain mapping."
+---
+
+Hosting your own proxy gives you a fresh domain that hasn't yet been flagged by your school's content filter, making it far more reliable than relying on public instances that are frequently discovered and blocked. Two free options stand out for quick deployments: **Vercel**, which handles the entire hosting stack through a one-click GitHub clone, and **FreeDNS**, which lets you map a custom subdomain to any existing proxy IP address without running your own server.
+
+## Hosting via Vercel
+
+Vercel's "clone and deploy" URL lets you fork any open-source unblocker repository directly into your own GitHub account and deploy it instantly — no command line required.
+
+<Steps>
+  <Step title="Build the deployment URL">
+    Start with the base Vercel clone URL and replace `REPOSITORYURL` with the GitHub URL of the unblocker repository you want to deploy:
+
+    ```text
+    https://vercel.com/new/clone?repositoryurl=REPOSITORYURL
+    ```
+
+    For example, to deploy Ultraviolet from Titanium Network:
+
+    ```text
+    https://vercel.com/new/clone?repositoryurl=https://github.com/titaniumnetwork-dev/Ultraviolet
+    ```
+  </Step>
+  <Step title="Log in with GitHub">
+    Navigate to the URL you just built. Vercel will prompt you to log in. Sign in with your GitHub account — if you don't have one, sign up first. If GitHub login fails, use the email option and verify your inbox, then return to the same link.
+  </Step>
+  <Step title="Name your repository">
+    Under **Create Git Repository**, enter a name for the new repo that will be linked to your unblocker. This name can be anything — it becomes part of your Vercel deployment URL.
+  </Step>
+  <Step title="Create and confirm">
+    Click **Create**. Vercel will ask you to authorize the action through GitHub — confirm it when prompted.
+  </Step>
+  <Step title="Use your deployment URL">
+    After a few moments, your proxy will be live at:
+
+    ```text
+    https://REPOSITORYNAME.vercel.app
+    ```
+
+    Replace `REPOSITORYNAME` with the repo name you chose in the previous step.
+  </Step>
+</Steps>
+
+<Tip>
+  Titanium Network maintains a collection of popular unblocker repositories ready to clone and deploy. Browse their GitHub organization at [https://github.com/titaniumnetwork-dev](https://github.com/titaniumnetwork-dev) for projects like Ultraviolet, Holy Unblocker, and more.
+</Tip>
+
+<Note>
+  Vercel's free tier has monthly bandwidth and build limits. If your proxy sees heavy use, Vercel may throttle or suspend the deployment until the next billing cycle resets. Consider deploying multiple instances under different repository names so you always have a fallback.
+</Note>
+
+## Hosting via FreeDNS
+
+FreeDNS lets you create a free subdomain and point it at any IP address — including the BYOD IP addresses provided by Titanium Network partner services. This is useful when you already have a working proxy IP but need a fresh hostname to reach it.
+
+<Steps>
+  <Step title="Create a FreeDNS account">
+    Go to [https://freedns.afraid.org/signup/?plan=starter](https://freedns.afraid.org/signup/?plan=starter) and fill in the sign-up form. You don't need to use your real name, and a temporary email address works fine. Check your inbox and click the activation link before continuing.
+  </Step>
+  <Step title="Navigate to subdomain management">
+    Once logged in, make sure you're at [https://freedns.afraid.org/subdomain/?ls=1](https://freedns.afraid.org/subdomain/?ls=1), then click **Add a subdomain**.
+  </Step>
+  <Step title="Configure the subdomain record">
+    Fill in the subdomain form with the following settings:
+
+    - **Type** → `A`
+    - **Subdomain** → anything you like (e.g., `myproxy`)
+    - **Domain** → choose any available domain from the dropdown list
+    - **Destination** → an IP address from the BYOD list that matches the proxy service you want to use (see the [BYOD guide](/resources/tutorials/byod) for the full list)
+  </Step>
+  <Step title="Save and wait for propagation">
+    Complete the CAPTCHA and click **Save!**. DNS propagation typically takes a few minutes. You can create additional subdomains pointing to the same or different IPs while you wait.
+  </Step>
+</Steps>
+
+<Warning>
+  FreeDNS is known to ban free-tier accounts after a few days of use. Create your subdomains when you need them and have a backup plan ready, such as a second account or a Vercel deployment.
+</Warning>
+
+## How to Check if a Proxy Is Working
+
+Testing a long list of proxy URLs one by one is tedious. Use a multi-URL opener tool to load several at once and quickly identify which ones respond:
+
+- [https://www.openallurls.com/](https://www.openallurls.com/)
+- [https://www.openmultipleurl.com/](https://www.openmultipleurl.com/)
+- [https://www.websiteplanet.com/webtools/multiple-url/](https://www.websiteplanet.com/webtools/multiple-url/)
+
+Paste your candidate proxy URLs into one of these tools, open them all simultaneously, and check which tabs load successfully. Any that time out or show a block page can be discarded.

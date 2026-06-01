@@ -1,0 +1,171 @@
+---
+title: "Web Proxies: Rammerhead, Hypertabs, Scramjet Links"
+sidebarTitle: "Proxies"
+description: "Working proxy and unblocker links for Rammerhead, Hypertabs, Scramjet, and Page Sandbox. Includes tips for finding working instances and troubleshooting proxy issues."
+---
+
+Web proxies are server-side tools that route your browser's traffic through an intermediary URL, letting you reach sites that would otherwise be blocked at the network level. Unlike a VPN — which encrypts all traffic from your device at the OS level — a web proxy works entirely inside the browser tab: you visit the proxy's URL, type in the destination, and the proxy fetches the page on your behalf. The four proxy flavors covered here are **Rammerhead** (a full session-based proxy that can be cloaked and opened as `about:blank`), **Hypertabs** (simple hosted instances on surge.sh), **Scramjet** (a newer service-worker proxy by MercuryWorkshop), and **Page Sandbox** (Cloudflare Workers–based instances).
+
+<Note>
+  The `Prxes` folder of this repository is **unmaintained**. Links go dead regularly as domain registrars reclaim free TLDs. For fresher links, check the [Mixes](/resources/mixes) section or join the **Titanium Network Discord** at [discord.gg/unblock](https://discord.gg/unblock).
+</Note>
+
+## Rammerhead
+
+Rammerhead is a session-based proxy that supports tab cloaking — the page title and URL shown in the browser's tab bar can be changed to look like a normal school site. Tabs can also be opened as `about:blank` to hide the content from a quick glance. Each link below runs a Rammerhead instance; if one is slow or unresponsive, try another.
+
+```
+https://britannica.cf/
+https://r.britannica.cf/
+https://britannica.gq/
+https://r.britannica.gq/
+https://codewars.cf/
+https://r.codewars.cf/
+https://pluralsight.cf/
+https://r.pluralsight.cf/
+https://flipgrid.gq/
+https://r.flipgrid.gq/
+https://coursera.cf/
+https://r.coursera.cf/
+https://monkeytype.cf/
+https://r.monkeytype.cf/
+https://quizlet.gq/
+https://r.quizlet.gq/
+https://typeracer.gq/
+https://r.typeracer.gq/
+https://freecodecamp.tk/
+https://r.freecodecamp.tk/
+https://freecodecamp.gq/
+https://r.freecodecamp.gq/
+https://chrome.lhost.dev/
+https://blocked.lhost.dev/
+https://tabs.lhost.dev/
+https://membean.cf/
+https://membean.gq/
+https://lsmdm.tk/
+https://lsmdm.gq/
+https://lsmdm.cf/
+https://jonahdaman.hillbrick.net/
+https://damon.ndr.cl/
+https://rammerhead.8bit.ca/
+https://rammermyhammer.goteeem.com/
+https://wecanbebees.primeflk.ch/
+https://verynormalsite.wendyandnick.net/
+https://rammerheadscience.dougtreadwell.com/
+https://classroom.frostcatcher.com/
+https://khanacademy.3992.in/
+https://learning.teamgaming.pw/
+https://gpt.tar.nz/
+https://biology.ndr.cl/
+https://wiki.jimmyqrg.com/
+https://play.jimmyqrg.com/
+https://jalenhurtsformvp.minecraftr.us/
+https://mathd.stegi-chorus.gr/
+https://mywholelife.screenclip.net/
+https://nana.rammer.apirent.cl/
+https://nana.rammer.boiso.ar/
+https://nana.rammer.govt.hu/
+https://rammer.nana.rinet.ai/
+https://rammer.nana.swift.cl/
+https://rammer.nana.alyaf.com/
+https://language.smelly.cc/
+https://coolguy.uzhi.ru/
+https://atoms.sciencefood.ca/
+https://rammer.nana.mikechan.ca/
+https://rammer.nana.on1a.com/
+https://rammer.nana.morso-si.dk/
+https://securly.com.dockl.com/
+https://securly.com.lqtai.com/
+https://rh.astrobl.xyz/
+https://hi.epicotp.com/
+https://ze9ijv.dynreisser.ch/
+https://learning.sorinastoica.ro/
+https://ballin.servernux.com/
+```
+
+A larger community-maintained list is also shared in the **Titanium Network Discord** — join at [discord.com/invite/VNT4E7gN5Y](https://discord.com/invite/VNT4E7gN5Y).
+
+## Hypertabs
+
+Hypertabs instances are hosted on surge.sh. They are simpler than Rammerhead but fast to load.
+
+```
+https://quack-start.surge.sh/
+https://spotty-hope.surge.sh/
+https://wary-fan.surge.sh/
+https://bashful-stretch.surge.sh/
+https://decorous-mouth.surge.sh/
+https://wiggly-owl.surge.sh/
+https://bumpy-picture.surge.sh/
+https://third-army.surge.sh/
+https://best-dock.surge.sh/
+```
+
+## Scramjet
+
+Scramjet is a newer open-source proxy built by MercuryWorkshop that uses service workers to intercept and rewrite requests in the browser. It supports a wider range of sites than older proxies.
+
+```
+https://scramjet.mercurywork.shop/
+```
+
+Source code and self-hosting instructions: [github.com/MercuryWorkshop/scramjet](https://github.com/MercuryWorkshop/scramjet)
+
+## Page Sandbox
+
+Page Sandbox instances run on Cloudflare Workers, which gives them very high uptime and global distribution. They tend to be fast but may have stricter rate limits.
+
+```
+https://io.sqeven.workers.dev/
+https://j.xj2.workers.dev/
+https://loli.xianyu1.workers.dev/
+https://little-credit-fc7d.sfzanghao.workers.dev/
+```
+
+## How to Check if a Proxy is Working
+
+Rather than opening each link one by one to test it, use a multi-URL opener to batch-check a list of proxies all at once.
+
+<Steps>
+  <Step title="Copy the proxy URLs you want to test">
+    Grab a set of links from the lists above and paste them into a text editor.
+  </Step>
+  <Step title="Open a multi-URL tool">
+    Navigate to one of the following services:
+    - [openallurls.com](https://www.openallurls.com/)
+    - [openmultipleurl.com](https://www.openmultipleurl.com/)
+    - [websiteplanet.com/webtools/multiple-url](https://www.websiteplanet.com/webtools/multiple-url/)
+  </Step>
+  <Step title="Paste the URLs and open them">
+    Paste your list of proxy URLs into the input box and click the button to open all of them. Your browser will open each in a new tab.
+  </Step>
+  <Step title="Check which tabs loaded">
+    Any tab that loads the Rammerhead (or other proxy) interface is working. Close the ones that show errors, and bookmark the working ones.
+  </Step>
+</Steps>
+
+## Troubleshooting
+
+<Accordion title="All of the proxies in the repo are blocked on my school network">
+  Join a Discord server like the Titanium Network Discord to get fresh links from community members who update them constantly. The repository is unmaintained, but community Discord servers stay up to date.
+</Accordion>
+
+<Accordion title="Discord is blocked on my school Chromebook">
+  Use another device — your phone, a home computer, or a library computer — to access Discord and find updated proxy links.
+</Accordion>
+
+<Accordion title="The word 'proxy' is filtered by my school's content filter">
+  Try searching in a different language. Searching **"прокси"** (Russian for proxy) or a translation in another language has worked around keyword-based filters. Alternatively, search on your personal phone or a device not connected to the school network.
+</Accordion>
+
+<Accordion title="I need a proxy but can't access Discord or GitHub to find one">
+  Search **"School Chromebook proxy 2026"** on YouTube from a personal device. YouTube tutorials regularly share working links in descriptions and comment sections.
+</Accordion>
+
+<Accordion title="I don't have a GitHub account to access repository links">
+  Create a free GitHub account at [github.com/signup](https://github.com/signup). If the signup page is blocked at school, create the account from your phone or home computer.
+</Accordion>
+
+<Tip>
+  You can self-host a Rammerhead instance for free using **Titanium Network BYOD** (Bring Your Own Device). This gives you a private proxy URL that only you know about, making it far less likely to be blocked. Visit the [Titanium Network GitHub](https://github.com/titaniumnetwork-dev) for setup guides.
+</Tip>

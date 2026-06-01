@@ -1,0 +1,150 @@
+---
+title: "How to Navigate and Use Chromebook Utilities"
+sidebarTitle: "How to Use"
+description: "Learn how to navigate the Chromebook Utilities collection, understand ChromeOS version requirements, find the right exploit for your device, and check if a method is still working."
+---
+
+Chromebook Utilities is organized into clearly labeled folders, each covering a different category of tools and techniques. Before diving into any specific exploit or resource, it is important to understand the overall structure of the collection, why your ChromeOS version matters more than almost anything else, and how to figure out which tools actually apply to your device. This page walks you through all of that so you can find what you need quickly and avoid wasting time on methods that won't work on your version.
+
+## Collection Structure
+
+The collection is divided into the following top-level sections:
+
+<CardGroup cols={2}>
+  <Card title="Exploits" icon="bug">
+    The largest section — hundreds of individual exploits covering unenrollment, extension bypasses, incognito access, developer mode, webview escapes, network bypasses, and much more. Each file names the exploit and often includes version ranges in the filename itself.
+  </Card>
+  <Card title="Cheats" icon="wand-magic-sparkles">
+    Cheats for educational platforms including Blooket, Edpuzzle, Gimkit, Kahoot, Quizizz, Quizlet, and others. Useful for automating answers or gaining in-game currency.
+  </Card>
+  <Card title="Alternatives" icon="arrow-right-arrow-left">
+    Alternative links for commonly blocked services: GitHub, Google, Google Workspace, Fandom, Reddit, Scratch, StackOverflow, TikTok, Twitter/X, Wikipedia, YouTube, and YouTube Music.
+  </Card>
+  <Card title="Gxmes" icon="gamepad">
+    Game websites (sorted with multiple mirrors each), larger online apps like Roblox and Minecraft, retro emulators, and a guide on how to play retro games on a managed Chromebook.
+  </Card>
+  <Card title="Prxes" icon="server">
+    A list of web proxies and unblockers. Note: this section is **unmaintained**. Check the Mixes folder for more actively referenced options.
+  </Card>
+  <Card title="Mixes (Prxes)" icon="layer-group">
+    Combined sites that function as proxies but also include pre-added games and app sections. Like Prxes, this section is **unmaintained**, but the links listed remain useful as starting points.
+  </Card>
+  <Card title="OS" icon="desktop">
+    Web-based operating system environments. Many of these function similarly to proxies and provide a full browser-based interface within a managed session.
+  </Card>
+  <Card title="Tutorials" icon="book-open">
+    Guides on how to make links for unblockers, proxies, and games — and how to host your own services. Good starting point if you want to self-host rather than rely on third-party links.
+  </Card>
+</CardGroup>
+
+## Why ChromeOS Version Numbers Matter
+
+This is the single most important thing to understand before using anything in this collection. **Most exploits only work on a specific range of ChromeOS versions.** Google patches vulnerabilities regularly, and what works on v118 may be completely non-functional on v128. Using an exploit outside its supported range will either do nothing or, in some cases, trigger unexpected behavior.
+
+Here are real examples from the collection that illustrate how version-specific these tools are:
+
+<Accordion title="CAUB — Chrome Auto Update Blocker">
+  **Works: v85 through v127 only.**
+
+  CAUB tricks your Chromebook into treating connected Wi-Fi networks as metered (pay-to-use) connections using `.onc` files, which prevents ChromeOS from checking for and applying updates. It does not work on v128 or later because Google changed how network metering is handled. This is a foundational exploit — many other exploits depend on using CAUB first to stay on a vulnerable version.
+</Accordion>
+
+<Accordion title="Skiovox — Kiosk Escape">
+  **Multiple separate versions: v118, v119–v120, v121, v124, v125–v126, v138–v144, v141.**
+
+  Skiovox is a family of kiosk-mode escape exploits that uses a timing-based technique to break out of a kiosk application into a regular Chrome browsing session. Because Google patches the specific kiosk flow each time, a different set of steps is required for nearly every major version range. Always match the exact Skiovox file to your current ChromeOS version.
+</Accordion>
+
+<Accordion title="Guest Mode">
+  **Up to v130:** Two variants available (Guest Mode and Guest Mode 2), both bypassing the managed restriction on guest sessions.
+
+  **v131 specifically:** A separate exploit file exists for v131 because Google changed the guest session flow in that release, requiring a different approach.
+
+  **v132 and later:** No guest mode bypass is documented in this collection as of the last update.
+</Accordion>
+
+<Accordion title="Incognito Bypasses">
+  The collection contains separate incognito bypass files for: **v81**, **v105**, **v123–v127**, and **v128**. Each uses a different technique to open an incognito window when the policy has been disabled by the enterprise admin. Using the wrong version's method will not work.
+</Accordion>
+
+<Accordion title="Other Version-Specific Exploits">
+  Additional examples from the exploit filenames in the collection:
+  - **BrowserAction Crasher** — up to v123
+  - **KIOSK Exploit** — up to v85
+  - **Webview Side Panel** — v108–v112
+  - **PowerR3SET (Kiosk Apps)** — up to v131
+  - **ProtonVPN on ChromeOS** — up to v129
+  - **Surfshark VPN** — up to v128
+  - **Play Store Bypass** — v106 only
+  - **Sh1mmer** — v111–v113 (specific boards)
+  - **User Policy Bypass** — up to v101
+  - **Unenrollment via Crosh** — up to v100
+  - **Change Wallpaper** — v99–v104
+</Accordion>
+
+## How to Check Your ChromeOS Version
+
+There are two easy ways to find your exact ChromeOS version:
+
+**Option 1 — Settings:**
+
+```
+chrome://settings/help
+```
+
+Navigate to this URL in your browser. The page will show your current ChromeOS version number (e.g., `130.0.6723.117`). The major version is the first number — `130` in this example.
+
+**Option 2 — Version page:**
+
+```
+chrome://version
+```
+
+This gives a more detailed breakdown including the ChromeOS platform version, browser version, and firmware version. The "Google Chrome" line shows the browser version; the "Platform" line shows the full ChromeOS build string.
+
+<Tip>
+  Write down or screenshot your ChromeOS version before starting. Some exploits (like CAUB) are specifically designed to help you **stay on your current version** to keep other exploits working. If you apply CAUB successfully, your device will stop auto-updating as long as you connect through a CAUB-configured network.
+</Tip>
+
+## Managed vs. Personal Chromebooks
+
+Understanding whether your Chromebook is **managed/enrolled** or **personal** determines which tools are relevant to you.
+
+**A managed (enrolled) Chromebook** is one that has been set up by a school, company, or other organization using Google's enterprise management platform. It is bound to a Google Admin domain, meaning administrators can remotely push policies, force-install extensions (like GoGuardian or Securly), restrict websites, disable developer mode, prevent guest sessions, and lock down many other features. Most of the exploits in this collection are specifically designed for managed Chromebooks.
+
+**A personal Chromebook** is one you own outright and signed into with a personal Google account. It has no enterprise enrollment and no forced policies. Many restrictions that exploits target simply do not exist on a personal device — developer mode is freely accessible, extensions can be installed from the Web Store without restriction, and there are no managed network filters.
+
+<Note>
+  If you are not sure whether your Chromebook is enrolled, navigate to `chrome://policy` in your browser. If the page shows a list of active policies, your device is managed. If the page is empty or says no policies are set, it is a personal device and most exploits in this collection are not relevant to you.
+</Note>
+
+## Step-by-Step: Finding and Using an Exploit
+
+<Steps>
+  <Step title="Check your ChromeOS version">
+    Open a new tab and navigate to `chrome://settings/help` or `chrome://version`. Note the major version number — for example, `128`. This is the most important piece of information for matching you to a working exploit.
+  </Step>
+  <Step title="Identify what you want to do">
+    Decide what your goal is. Do you want to bypass a monitoring extension like GoGuardian? Access a blocked website through a proxy? Install an extension without admin permission? Enable incognito mode? Each goal maps to a different section or set of files in the collection. Browse the section descriptions above to narrow down where to look.
+  </Step>
+  <Step title="Find the matching exploit or tool">
+    Inside the relevant section (most likely the `Exploits` folder), scan the filenames for your use case. Pay close attention to version numbers in parentheses — for example, `Incognito (v123-v127).txt` is only for those versions. If you are on v128, look for `Incognito (v128).txt` instead. If no file matches your version, the technique may be patched on your version and an alternative will need to be found.
+  </Step>
+  <Step title="Follow the instructions carefully">
+    Open the matching file and read it fully before doing anything. Most exploits include step-by-step instructions, notes about what can go wrong, and credits to the original author. Follow each step exactly as written. If the exploit involves timing (like Skiovox), practice the steps mentally before executing them. If something does not work, double-check that your ChromeOS version falls within the stated range.
+  </Step>
+</Steps>
+
+## Tips for Getting the Most Out of This Collection
+
+<Tip>
+  **Join the Titanium Network Discord at `.gg/unblock`** for live community help. The Discord has dedicated channels where people post the latest working exploits, report which tools have been patched, and help troubleshoot issues. Since this collection is no longer frequently updated, the Discord is the best source for what is currently working.
+</Tip>
+
+<Tip>
+  **Always check the version requirement before trying an exploit.** Attempting a technique on the wrong ChromeOS version is the most common reason things fail. If the filename does not include a version, read the file — version requirements are usually stated in a "Notes" section at the top.
+</Tip>
+
+<Note>
+  Some exploits in the collection require a **compatible kiosk application** to be installed by your school (like Skiovox), or depend on **specific extensions already being present** (like exploits that route through uBlock Origin). Read the prerequisites in each file carefully — missing a dependency is the second most common reason an exploit fails.
+</Note>

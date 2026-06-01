@@ -1,0 +1,171 @@
+---
+title: "Web OS and In-Browser Virtual Machines for Chromebooks"
+sidebarTitle: "Web OS"
+description: "Run a full operating system in the browser on a managed Chromebook using AnuraOS, AaronOS, Windows 10/11 emulation, GitHub Codespaces VMs, Incus UI, and more."
+---
+
+Web operating systems are browser-based environments that simulate a real desktop OS — complete with a window manager, file system, terminal, and sometimes a full Linux userland — without ever leaving Chrome. On a managed Chromebook they're especially powerful because you gain access to capabilities the school's MDM profile would normally lock away, like a real shell or unrestricted browser. They fall into two broad tiers: **lightweight web OSes** (AaronOS, AfiliteOS, VortexOS) that are mostly UI simulations with a few utilities, and **heavy environments** (AnuraOS with Anura Linux, Windows 10/11 emulation, GitHub Codespaces, Incus UI with Ubuntu) that run genuine operating system code and give you a persistent, functional shell or desktop.
+
+## Lightweight & Mid-Range Web OSes
+
+These run entirely in the browser tab. Some include a working Linux environment; others are primarily UI / proxy experiences.
+
+<CardGroup cols={2}>
+  <Card title="AnuraOS" href="https://anura.pro/">
+    A browser-based Linux environment with a real shell, file system, and persistent state. One of the most capable web OSes available.
+    - [anura.pro](https://anura.pro/)
+  </Card>
+  <Card title="AaronOS" href="https://aaronos.dev/">
+    A polished browser OS simulation with a retro feel. Good as a proxy since it can open other sites in an in-OS browser.
+    - [aaronos.dev](https://aaronos.dev/)
+  </Card>
+  <Card title="AfiliteOS" href="https://afilite.app">
+    A frequently-mirrored web OS that acts as both a browser environment and a proxy. Maintained with many fallback domains.
+    - [afilite.app](https://afilite.app) — main
+    - [bigbang.pics](https://bigbang.pics/)
+    - [55gms.store](https://55gms.store/)
+    - [brunysixl.work](https://brunysixl.work/)
+    - [jimmysgames.cc](https://jimmysgames.cc/) | [jimmysgames.xyz](https://jimmysgames.xyz/)
+    - [mathmayhem.xyz](https://mathmayhem.xyz/)
+    - [kidscalculatorforgraphing.xyz](https://kidscalculatorforgraphing.xyz/)
+    - [teacher4biology.fit](https://teacher4biology.fit/)
+    - [mathematicsedu.xyz](https://mathematicsedu.xyz/)
+    - [activitysforscience.space](https://activitysforscience.space/)
+    - Discord: [discord.com/invite/qVgKmXBnrx](https://discord.com/invite/qVgKmXBnrx)
+  </Card>
+  <Card title="DaeDalOS" href="https://dustinbrett.com/">
+    A remarkably feature-complete browser desktop that includes a working Linux (Buildroot) environment.
+    - [dustinbrett.com](https://dustinbrett.com/)
+  </Card>
+  <Card title="LuminalOS" href="https://exploring.vcsa.bayworld.net/">
+    A web OS with multiple active mirrors:
+    - [exploring.vcsa.bayworld.net](https://exploring.vcsa.bayworld.net/)
+    - [playernation.goodfox.com.br](https://playernation.goodfox.com.br/)
+    - [iloveteachers.graphicon.org](https://iloveteachers.graphicon.org/)
+  </Card>
+  <Card title="NebuliOS" href="https://1013883298.vets.co.il/">
+    Hold the **N** key while loading to enter the OS. Maintained across a large number of obscure international domains to avoid filtering.
+    - [1013883298.vets.co.il](https://1013883298.vets.co.il/)
+    - [desmos.tovamiasto.com](https://desmos.tovamiasto.com/)
+    - [desmoscalculator.eminescusm.ro](https://desmoscalculator.eminescusm.ro/)
+    - [final-exam.studyguide.pro-house.cl](https://final-exam.studyguide.pro-house.cl/)
+    - [forest-higschool.ddnss.de](https://forest-higschool.ddnss.de/)
+    - [myeduportal.ddnss.de](https://myeduportal.ddnss.de/)
+    - [texa-state-colloge.goip.de](https://texa-state-colloge.goip.de/)
+    - Discord: [discord.gg/z4ZJnK2x7S](https://discord.gg/z4ZJnK2x7S)
+  </Card>
+  <Card title="VortexOS" href="https://vortexos.net/">
+    A web OS with a built-in games section and proxy features.
+    - [vortexos.net](https://vortexos.net/)
+    - [vortexos.onrender.com](https://vortexos.onrender.com/)
+    - Also accessible from: [vtx.chat/app/open/gam3s](https://vtx.chat/app/open/gam3s)
+  </Card>
+  <Card title="Terbium" href="https://terbiumon.top/">
+    A browser OS with proxy and game access features.
+    - [terbiumon.top](https://terbiumon.top/)
+  </Card>
+</CardGroup>
+
+## Windows in the Browser
+
+These options let you run a Windows desktop environment, either as a JavaScript/React simulation or as a real virtual machine.
+
+### Windows 11 (React Simulation)
+
+These are visual simulations of Windows 11 built in React — not a real VM, but functional for exploring the interface and running web apps:
+
+- [hfgxlew4fdtbxq3cucjq.webos.tenfell.cn](https://hfgxlew4fdtbxq3cucjq.webos.tenfell.cn/)
+- [mail.webos.tenfell.cn](https://mail.webos.tenfell.cn/)
+- [virtwin11.pages.dev](https://virtwin11.pages.dev/)
+- [win11.orlicz.top](https://win11.orlicz.top/)
+- [win11.yam9981.top](https://win11.yam9981.top/)
+- [win11ui.netlify.app](https://win11ui.netlify.app/)
+- [windows11-react.vercel.app](https://windows11-react.vercel.app/)
+- [windows11.pages.dev](https://windows11.pages.dev/)
+
+### Microsoft Labs VM (Real Windows 10)
+
+Microsoft's own training labs give you a free Windows 10 virtual machine through your browser — no software download required. You need a Microsoft account.
+
+<Steps>
+  <Step title="Go to the exercise page">
+    Navigate to [learn.microsoft.com/en-us/training/modules/implement-common-integration-features-finance-ops/10-exercise-1](https://learn.microsoft.com/en-us/training/modules/implement-common-integration-features-finance-ops/10-exercise-1).
+  </Step>
+  <Step title="Sign in">
+    Sign into your Microsoft account if you haven't already.
+  </Step>
+  <Step title="Launch the VM">
+    Click the **Launch VM Mode** button.
+  </Step>
+  <Step title="Enter the password">
+    When prompted, enter the password: `pass@word1`
+  </Step>
+  <Step title="Open a free browser">
+    Click **Edge** inside the VM to get an unrestricted browser window.
+  </Step>
+</Steps>
+
+<Note>
+  The lab VM uses the US keyboard layout regardless of your actual layout. Sound doesn't work and it blocks some sites. The VM runs Windows 10, not Windows 11.
+</Note>
+
+### Microsoft Copilot Webview
+
+Microsoft Copilot's "action" mode gives you a restricted but real browser webview inside Copilot itself.
+
+<Steps>
+  <Step title="Open Copilot">
+    Go to [copilot.microsoft.com](https://copilot.microsoft.com/) and sign in.
+  </Step>
+  <Step title="Start a new chat">
+    Start a new conversation and switch to **Action** mode.
+  </Step>
+  <Step title="Type a command and submit">
+    Type something and click Enter.
+  </Step>
+  <Step title="Take control">
+    Click **Take control** to interact with the live webview.
+  </Step>
+</Steps>
+
+<Note>
+  Copilot actions have a limited daily quota before you need to upgrade or wait until the next day.
+</Note>
+
+### Incus UI — Ubuntu Linux VM
+
+Run a full Ubuntu Linux desktop in the browser via the Incus container/VM platform's free hosted demo.
+
+<Steps>
+  <Step title="Open the Incus demo">
+    Go to [linuxcontainers.org/incus/try-it/](https://linuxcontainers.org/incus/try-it/). Click **Accept**, then click **Web UI**.
+  </Step>
+  <Step title="Create a VM instance">
+    Click **Create Instance**, enter a name, then click **Browse Images**.
+  </Step>
+  <Step title="Select Ubuntu desktop">
+    In the distribution drop-down, find **Ubuntu** (at the very bottom). Select a distro — make sure the entry says **"desktop"** and **"VM"**.
+  </Step>
+  <Step title="Launch the console">
+    Once the VM is created, click the **Console** tab, then click **Web** to open the desktop in your browser.
+  </Step>
+</Steps>
+
+<Note>
+  Ubuntu is the fastest option. Other distros work but are noticeably slower. Credits: [github.com/Charlieis1nsan3](https://github.com/Charlieis1nsan3) (HyperNut).
+  Video tutorial: [youtube.com/watch?v=6WgHa2JFlhc](https://www.youtube.com/watch?v=6WgHa2JFlhc).
+</Note>
+
+## GitHub Codespaces Windows VM
+
+GitHub Codespaces can be used to spin up a Windows virtual machine using the [dockur/windows](https://github.com/dockur/windows) Docker image. This gives you a real Windows install accessible from the browser.
+
+Full setup instructions are documented at [github.com/dockur/windows](https://github.com/dockur/windows). The same approach applies to GitHub Codespaces — see the Codespaces VM section below.
+
+**Requirements:**
+- A GitHub account (free tier Codespaces hours apply)
+- A Microsoft account (required for Windows activation)
+
+<Tip>
+  If your school blocks certain sites even inside a web OS or VM, try using a proxy like Skiovox or Ultraviolet first to get an unrestricted browser window, then navigate to a web OS from within that proxied tab.
+</Tip>

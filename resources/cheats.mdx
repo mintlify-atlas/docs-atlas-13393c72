@@ -1,0 +1,147 @@
+---
+title: "Cheats for Blooket, Kahoot, Gimkit, Edpuzzle & More"
+sidebarTitle: "Cheats"
+description: "Scripts and tools to automate answers or gain advantages in Blooket, Edpuzzle, Gimkit, Kahoot, Quizlet, and Wayground (Quizizz). Includes links to cheat repositories."
+---
+
+Educational platform cheats come in two main forms: **JavaScript bookmarklets** (snippets dragged to the bookmark bar and clicked during a game) and **hosted scripts** (fetched from GitHub or similar via `fetch()` and `eval()`). Many of the tools listed here are open-source and actively maintained on GitHub, often as community forks after original authors received takedowns. Some cheats work through dedicated websites that don't require any code injection at all.
+
+<Warning>
+  Using cheats may violate your school's academic integrity policy and the terms of service of each platform. You are solely responsible for any consequences.
+</Warning>
+
+<Warning>
+  JavaScript bookmarklets (`javascript:` URLs) were patched on managed Chromebooks in newer versions of ChromeOS. They will **not** work unless you downgrade ChromeOS or use a bookmarklet runner to execute the code. Cheats that use external hosted scripts (via `fetch`) may still work when run from the browser console or DevTools if those are accessible.
+</Warning>
+
+## Platform Cheats
+
+<AccordionGroup>
+  <Accordion title="Blooket">
+    Blooket cheats are maintained as a community project on both GitHub and GitLab after the original author (Minesraft2) received a Cease and Desist from Blooket.
+
+    **Cheat GUI / bot site:**
+    - [blooket-bot.vercel.app](https://blooket-bot.vercel.app/) — hosted cheat interface
+
+    **GitHub repositories:**
+    - [github.com/Blooket-Council/Blooket-Cheats](https://github.com/Blooket-Council/Blooket-Cheats) — current maintained version
+    - [gitlab.com/blooket/blooket-cheats](https://gitlab.com/blooket/blooket-cheats) — GitLab mirror (old)
+    - [github.com/randomstuff69/blooketcheatsplus](https://github.com/randomstuff69/blooketcheatsplus) — Blooket Cheats Plus
+    - [github.com/Shploop/Blooket-Cheats](https://github.com/Shploop/Blooket-Cheats) — backup, not updated
+
+    **How to use:**
+    - Purple boxes are GUIs — drag them into your bookmark bar.
+    - Orange boxes activate specific game mode features.
+    - Click the bookmarklet while in an active Blooket game.
+
+    <Warning>
+      Bookmarklets will not work on managed Chromebooks on newer ChromeOS versions. JavaScript bookmarklets were patched — you need to downgrade or use a bookmarklet runner to execute them.
+    </Warning>
+  </Accordion>
+
+  <Accordion title="Edpuzzle">
+    The Edpuzzle cheat script by ading2210 can fetch and display multiple-choice answers, auto-answer questions, skip videos, change playback speed, and more. It works without a login or extension and uses `about:blank` so it doesn't appear in browser history.
+
+    **Bookmarklet (drag to bookmark bar, then click while on an Edpuzzle assignment):**
+
+    ```javascript
+    javascript: fetch("https://cdn.jsdelivr.net/gh/ading2210/edpuzzle-answers@latest/script.js").then(r => r.text()).then(r => eval(r))
+    ```
+
+    **Direct links:**
+    - [github.com/ading2210/edpuzzle-answers](https://github.com/ading2210/edpuzzle-answers)
+    - [edpuzzle.hs.vc](https://edpuzzle.hs.vc/)
+
+    **Features:**
+    1. Fetches and displays multiple-choice answers for any assignment
+    2. Auto-answers all multiple-choice questions
+    3. Video skipper for arbitrary navigation within an assignment
+    4. Prevents pausing when the tab is hidden
+    5. Video speed control
+    6. Assignment stats
+    7. Works on private Edpuzzle videos
+    8. Supports Edpuzzles embedded in Canvas and Schoology
+
+    <Note>
+      This will not work on a managed Chromebook if you are on a later ChromeOS version that blocks JavaScript bookmarklets. Use another device or a bookmarklet runner.
+    </Note>
+  </Accordion>
+
+  <Accordion title="Gimkit">
+    **Gimmick** is recommended for self-hosting on a Chromebook (no DevTools required):
+    - [github.com/VillainsRule/Gimmick](https://github.com/VillainsRule/Gimmick)
+    - [gim.villainsrule.xyz/join](https://gim.villainsrule.xyz/join) — hosted version
+
+    **GimkitCheat** (requires Violentmonkey, DevTools, or `javascript:` support):
+    - [github.com/TheLazySquid/GimkitCheat](https://github.com/TheLazySquid/GimkitCheat)
+
+    **Usage notes:**
+    - Use Gimmick for self-hosting on a Chromebook — it doesn't need console access.
+    - Use GimkitCheat if you have Violentmonkey, Inspect Element / DevTools, or `javascript:` URLs enabled.
+  </Accordion>
+
+  <Accordion title="Kahoot">
+    **Kahoot cheats:**
+    - [kahoot.club](https://kahoot.club) — enter a Kahoot game PIN to get answers and bot spam tools
+
+    **Multi-platform cheat sites (include Kahoot):**
+    - [schoolcheats.net](https://schoolcheats.net/) — covers Kahoot, Blooket, Edpuzzle, Wayground, DeltaMath, Edmentum, Edulastic, Lexia
+    - [cheatnetwork.eu](https://cheatnetwork.eu/) — covers Kahoot, Quizizz, Blooket, Quizlet, Edpuzzle, Gimkit, and more
+    - [quizit.online](https://quizit.online/) — covers Kahoot, Quizizz, Quizlet, Blooket, Gimkit, Brainly, and more
+  </Accordion>
+
+  <Accordion title="Quizlet">
+    These cheats work as bookmarklets and can also be pasted directly into the browser console. Credits: [github.com/UndercoverGoose/classroom-cheats](https://github.com/UndercoverGoose/classroom-cheats).
+
+    **Quizlet Live — highlights the correct answer:**
+
+    ```javascript
+    javascript:try{async function getSetId(pin){const res=await fetch(`https://quizlet.com/webapi/3.8/multiplayer/game-instance?gameCode=${pin}`);const json=await res.json();if(json.error)throw new Error(json.error.message);return json.gameInstance.itemId;}async function getSetData(setId){const res=await fetch(`https://quizlet.com/${setId}`);const text=await res.text();const data=text.match(/\\\"termIdToTermsMap\\\":{.+?{.+?\\\"termSort\\\":/gi)?.[0];if(!data)throw new Error("Failed to parse set data.");const parsed=JSON.parse(data.slice(21,-14).replaceAll(`\\\"`,`"`));return[Object.fromEntries(Object.values(parsed).map(({word, definition})=>[word, definition])),Object.fromEntries(Object.values(parsed).map(({word, definition})=>[definition, word]))];}function getActiveQuestion(){try{const question=document.querySelector(".StudentPrompt-text").textContent;const answers=Array.from(document.querySelectorAll(".StudentAnswerOption-text"));return[question, answers];}catch{}return[null,null];}(async()=>{const pin=prompt("Enter PIN, like: XXX-XXX","").match(/[0-9a-zA-Z]/g).join("");if(pin.length!==6)throw new Error("Pin must be 6 characters in length.");const setId=await getSetId(pin);const[term2Def, def2Term]=await getSetData(setId);setInterval(async function(){const[question,choices]=getActiveQuestion();if(!question||!choices)return;if(question in term2Def){choices.forEach((choice)=>{if(choice.textContent===term2Def[question])choice.style.fontWeight="bolder";});}else if(question in def2Term){choices.forEach((choice)=>{if(choice.textContent===def2Term[question])choice.style.fontWeight="bolder";});}else{choices.forEach((choice)=>{choice.style.fontWeight="normal";});}},0);})()}catch(err){alert(err)};void 0
+    ```
+
+    **Quizlet Match — color-codes matching pairs:**
+
+    ```javascript
+    javascript:(function(){const matches={};Quizlet.matchModeData.terms.forEach((term)=>{matches[term.word]=term.definition});let css='FormattedText notranslate TermText MatchModeQuestionGridTile-text';if(document.getElementsByClassName(css).length===0){css='MatchModeQuestionScatterTile'}const tiles=Array.from(document.getElementsByClassName(css));const colors=['#f93640','#f98836','#f9e936','#3df936','#36f9d9','#3650f9','#7e36f9','#dc36f9','#ffffff','#a3a3a3','#424242'];Array.from(document.getElementsByClassName('MatchModeQuestionGridTile-image')).forEach((image)=>{image.style.display='none'});let colorIndex=0;for(const term in matches){const definition=matches[term];tiles.forEach((tile)=>{if(tile.textContent===term){tiles.forEach((box)=>{if(box.textContent===definition){box.style.background=colors[colorIndex];box.style.color='black'}});tile.style.background=colors[colorIndex];tile.style.color='black';colorIndex+=1}})}})();void 0
+    ```
+
+    **Quizlet Gravity — auto-types answers for falling asteroids:**
+
+    ```javascript
+    javascript:(function(){if(!window.gooseGravity){window.gooseGravity=true;const matches={};Quizlet.gravityModeData.terms.forEach((term)=>{matches[term.word]=term.definition});const reversed={};for(const term in matches){reversed[matches[term]]=term}setInterval(function(){const asteroids=Array.from(document.querySelectorAll('.TermText'));if(asteroids.length===0){return}asteroids.forEach((asteroid)=>{const term=asteroid.textContent;if(asteroid.gooseAnswered){return}if(term in matches){asteroid.textContent=matches[term];asteroid.gooseAnswered=true}else if(term in reversed){asteroid.textContent=reversed[term];asteroid.gooseAnswered=true}})},100)}})();void 0
+    ```
+  </Accordion>
+
+  <Accordion title="Wayground (Quizizz)">
+    There are no standalone Wayground/Quizizz-specific scripts listed — use the multi-platform cheat sites below instead. These all support Quizizz/Wayground:
+
+    - [schoolcheats.net](https://schoolcheats.net/) — covers Wayground (Quizizz) and many others
+    - [cheatnetwork.eu](https://cheatnetwork.eu/) — covers Quizizz and more
+    - [quizit.online](https://quizit.online/) — covers Quizizz and more
+
+    <Note>
+      You may need to log in with a Discord account for some features on these sites. If Discord is blocked on your school network, use a proxy to access it.
+    </Note>
+  </Accordion>
+
+  <Accordion title="Other Cheats (Multi-Platform)">
+    These sites aggregate cheats for many platforms in one place:
+
+    **School Cheats** — [schoolcheats.net](https://schoolcheats.net/)
+    - Covers: DeltaMath, Wayground (Quizizz), Kahoot, Blooket, Edpuzzle, Edmentum, Edulastic, Lexia
+
+    **Cheat Network** — [cheatnetwork.eu](https://cheatnetwork.eu/)
+    - Covers: Quizizz, Kahoot, Blooket, Education Perfect, DeltaMath, Quizlet, Edpuzzle, Gimkit, Edulastic, Liveworksheets, LearningApps, Nearpod, Wordwall
+
+    **Quizit** — [quizit.online](https://quizit.online/)
+    - Covers: Quizizz, Kahoot, Wordwall, Liveworksheets, Edpuzzle, Quizlet, Blooket, Gimkit, Brainly, Testportal
+
+    <Note>
+      Some features on these sites require a Discord login. If Discord is blocked on your network, access them through a proxy first.
+    </Note>
+  </Accordion>
+</AccordionGroup>
+
+## Bookmarklet Runners
+
+If JavaScript bookmarklets are blocked on your managed Chromebook (which they are on most modern ChromeOS versions), you need a way to execute arbitrary JavaScript. See the [Bookmarklets](/exploits/bookmarklets) page for methods to run bookmarklets on newer ChromeOS versions.

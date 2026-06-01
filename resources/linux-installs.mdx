@@ -1,0 +1,238 @@
+---
+title: "Install Linux on a Managed Chromebook"
+sidebarTitle: "Linux Installs"
+description: "Install Debian Linux or TerraOS on a Chromebook using Shimboot, root ChromeOS with Tunety, or boot from USB. Includes full distro installs and ChromeOS-based Linux options."
+---
+
+There are two fundamentally different approaches to running Linux on a managed Chromebook. The first is running Linux **inside ChromeOS** — this is what Crostini (the official Linux container feature) does, and it normally requires the admin to enable it. The second approach is **replacing or bypassing ChromeOS** at boot, using a modified shim image, a USB boot, or a root exploit to get a full Linux shell. The methods on this page all fall into the second category: they operate outside ChromeOS and give you a real Linux distro or root shell. Most require a USB drive, a separate Linux or Windows PC to build the image, and in some cases a physical write-protect bypass — read the requirements for each method carefully before proceeding.
+
+<Warning>
+  These methods may require enabling developer mode, unenrolling your device, or flashing firmware. Developer mode will powerwash your Chromebook and erase all local data. Unenrolling a school-managed device may be a policy violation with serious consequences. Firmware flashing carries a risk of bricking your device. Proceed at your own risk.
+</Warning>
+
+## Shimboot — Debian Linux via RMA Shim
+
+Shimboot patches a Chrome OS RMA shim to act as a bootloader for a standard Debian Linux installation. It lets you boot a full Debian desktop **without unenrolling your Chromebook or modifying firmware**.
+
+**Credits:** [ading2210](https://github.com/ading2210) — [github.com/ading2210/shimboot](https://github.com/ading2210/shimboot) | [shimboot.ading.dev](https://shimboot.ading.dev/)
+
+### Requirements
+
+- A separate Linux PC for the build process (preferably Debian-based)
+  - WSL2 on Windows is supported
+  - GitHub Codespaces is **not** supported
+- A USB drive at least 8 GB in size
+- At least 20 GB of free disk space on the build machine
+- An x86-based Chromebook
+
+### Build the Image (Automated)
+
+<Steps>
+  <Step title="Find your board name">
+    Search for your Chromebook model name at [cros.download](https://cros.download) to find the correct board name.
+  </Step>
+  <Step title="Clone the repository">
+    ```bash
+    git clone https://github.com/ading2210/shimboot
+    cd shimboot
+    ```
+  </Step>
+  <Step title="Build the disk image">
+    ```bash
+    sudo ./build_complete.sh <board_name>
+    ```
+    Replace `<board_name>` with your Chromebook's board name. This downloads the required data and builds everything automatically.
+  </Step>
+</Steps>
+
+### Build the Image (Manual Steps)
+
+If you prefer to run each step yourself:
+
+<Steps>
+  <Step title="Obtain an RMA shim">
+    Find a Chrome OS RMA shim for your board. Most have been publicly leaked and are searchable online.
+  </Step>
+  <Step title="Download a recovery image">
+    Download a ChromeOS recovery image for your board from [chromiumdash.appspot.com/serving-builds?deviceCategory=ChromeOS](https://chromiumdash.appspot.com/serving-builds?deviceCategory=ChromeOS). Unzip both the shim and the recovery image.
+  </Step>
+  <Step title="Create the rootfs directory">
+    ```bash
+    mkdir -p data/rootfs
+    ```
+  </Step>
+  <Step title="Build the base rootfs">
+    ```bash
+    sudo ./build_rootfs.sh data/rootfs bookworm
+    ```
+  </Step>
+  <Step title="Patch the rootfs">
+    ```bash
+    sudo ./patch_rootfs.sh path_to_shim path_to_recovery data/rootfs
+    ```
+  </Step>
+  <Step title="Generate the disk image">
+    ```bash
+    sudo ./build.sh image.bin path_to_shim data/rootfs
+    ```
+  </Step>
+</Steps>
+
+### Boot Shimboot
+
+<Steps>
+  <Step title="Get a shimboot image">
+    Either use your built `image.bin` or download a prebuilt image from [github.com/ading2210/shimboot/releases](https://github.com/ading2210/shimboot/releases).
+  </Step>
+  <Step title="Flash to USB">
+    Flash the image to a USB drive or SD card using [Chromebook Recovery Utility](https://chrome.google.com/webstore/detail/chromebook-recovery-utili/pocpnlppkickgojjlmhdmidojbmbodfm) or `dd` on Linux.
+  </Step>
+  <Step title="Enable developer mode">
+    Enable developer mode on your Chromebook. If enrolled, follow the sh1mmer instructions at [sh1mmer.me](https://sh1mmer.me/) (see "Executing on Chromebook").
+  </Step>
+  <Step title="Boot from USB">
+    Plug the USB into your Chromebook and enter recovery mode. Shimboot should auto-detect the USB and launch.
+  </Step>
+  <Step title="Log in to Debian">
+    Log in with the username and password you configured. Prebuilt image defaults: username `user`, password `user`.
+  </Step>
+  <Step title="Expand the filesystem">
+    ```bash
+    sudo growpart /dev/sdX 4
+    sudo resize2fs /dev/sdX4
+    ```
+    Replace `sdX` with the block device for your USB drive. This expands the partition to fill the full disk.
+  </Step>
+  <Step title="Change your password">
+    ```bash
+    passwd user
+    ```
+    The root user is disabled by default.
+  </Step>
+</Steps>
+
+---
+
+## TerraOS — Multiple Linux Distros via RMA Shim
+
+TerraOS boots Linux distros from an RMA shim without modifying your existing ChromeOS installation. It supports x86_64 Chromebooks and experimentally supports `jacuzzi` board Chromebooks.
+
+**Credits:** [r58Playz](https://github.com/r58Playz) — [github.com/r58Playz/terraos](https://github.com/r58Playz/terraos)
+
+### Requirements
+
+- A separate build machine (Linux)
+- An RMA shim for your board
+- A ChromeOS recovery image for your board
+- A Chrome OS Flex recovery image of the same version
+
+### Build and Install
+
+<Steps>
+  <Step title="Clone the repository">
+    ```bash
+    git clone https://github.com/r58Playz/terraos.git
+    ```
+  </Step>
+  <Step title="Create a build directory">
+    Inside the cloned directory, create a `build` subdirectory:
+    ```bash
+    mkdir build && cd build
+    ```
+  </Step>
+  <Step title="Build Stage 1">
+    ```bash
+    bash ../scripts/build_stage1.sh <defconfig>
+    ```
+    Use `terraos` as the defconfig for x86_64 Chromebooks. Use `terraos_jacuzzi` for jacuzzi board Chromebooks (experimental).
+  </Step>
+  <Step title="Build AUR packages">
+    ```bash
+    bash ../scripts/build_aur_packages.sh
+    ```
+  </Step>
+  <Step title="Build the full image">
+    ```bash
+    bash ../scripts/build_all.sh <shim.bin> <board_recovery.bin> <reven_recovery.bin>
+    ```
+    Replace `<shim.bin>`, `<board_recovery.bin>`, and `<reven_recovery.bin>` with the paths to your shim, board recovery image, and Chrome OS Flex recovery image respectively.
+  </Step>
+</Steps>
+
+The build outputs a bootloader image, SquashFS, arch RootFS tarballs, and combined images (arch RootFS + TerraOS ChromeOS). The default arch RootFS credentials are username `terraos`, password `terraos`.
+
+---
+
+## Root ChromeOS with Tunety
+
+Tunety is a patched exploit that used `tune2fs` to mark a partition as corrupt and trigger a kernel panic in a specific way to obtain a VT2 root shell — without unenrolling or replacing ChromeOS. The root shell persists until closed.
+
+<Warning>
+  This exploit has been patched by Google. It involved multiple race conditions and required up to 50 reboots in rare cases. It is documented here for reference only.
+</Warning>
+
+**Credits:** Crystal — [omada.cafe/contact/crystals/blog/article/2024/12/11/](https://omada.cafe/contact/crystals/blog/article/2024/12/11/)
+
+### How It Worked
+
+<Steps>
+  <Step title="Download tunety.bin">
+    Download `tunety.bin` from [omada.cafe/contact/crystals/blog/assets/tunety.bin](https://omada.cafe/contact/crystals/blog/assets/tunety.bin).
+  </Step>
+  <Step title="Flash to USB or SD card">
+    Flash it using ChromeOS Recovery Utility, Fedora Media Writer, Etcher, Rufus, or any other flashing tool.
+  </Step>
+  <Step title="Sign in to your Chromebook">
+    Sign in normally on your Chromebook.
+  </Step>
+  <Step title="Plug in the USB">
+    Plug in the flashed USB drive or SD card.
+  </Step>
+  <Step title="Wait for the root shell">
+    Wait to be automatically rebooted into a root shell. If it doesn't work, try up to 25 times — the exploit relies on race conditions and is not deterministic.
+  </Step>
+</Steps>
+
+---
+
+## Boot from USB (USBoot)
+
+The simplest method for running an alternative OS: enable developer mode, set the USB boot flag, and press `Ctrl+U` at the OS verification screen to boot from any bootable USB.
+
+### Requirements
+
+- Developer mode enabled on your Chromebook
+
+### Instructions
+
+<Steps>
+  <Step title="Enter recovery mode to enable developer mode">
+    Hold **Esc + Power + Refresh** simultaneously to enter recovery mode, then follow the prompts to enable developer mode. This will powerwash your device.
+  </Step>
+  <Step title="Boot to internal disk">
+    On the OS verification screen, select **Boot from internal disk**.
+  </Step>
+  <Step title="Open a VT2 shell">
+    Press **Ctrl + Alt + F2** to switch to a terminal.
+  </Step>
+  <Step title="Enable USB boot">
+    ```bash
+    sudo crossystem dev_boot_usb=1
+    ```
+  </Step>
+  <Step title="Boot from USB">
+    Return to the OS verification screen and press **Ctrl + U** to boot from the plugged-in USB drive.
+  </Step>
+</Steps>
+
+**Credits:** [JackWagon885](https://github.com/The-Wagonization/The-Wagon-Site) — [the-wagonization.github.io/The-Wagon-Site/](https://the-wagonization.github.io/The-Wagon-Site/)
+
+---
+
+<Tip>
+  Some Linux install methods (particularly full firmware replacement approaches) require disabling hardware write protect first. See the [Hardware Write Protect](/exploits/hardware-write-protect) page for instructions specific to your Chromebook model.
+</Tip>
+
+<Note>
+  The Chromebook modding community maintains extensive documentation and support channels. Two key resources are **Titanium Network** ([docs.titaniumnetwork.org](https://docs.titaniumnetwork.org/)) and **Mercury Workshop** ([mercurywork.shop](https://mercurywork.shop/)), both of which cover ChromeOS exploits, shim booting, and Linux installs in detail.
+</Note>

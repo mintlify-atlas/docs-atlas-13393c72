@@ -1,0 +1,326 @@
+---
+title: "Alternative Links for Blocked Sites on School Chromebooks"
+sidebarTitle: "Alternatives"
+description: "Mirror and alternative links for YouTube, Google, Reddit, GitHub, Scratch, Wikipedia, TikTok, Twitter, StackOverflow, and Google Workspace when the main domains are blocked."
+---
+
+When a school's content filter blocks a site like YouTube or Reddit, it typically does so by domain name — it has `youtube.com` on a blocklist, not every possible URL that serves similar content. Alternative and mirror frontends exploit that gap by serving the same content through a completely different domain. A Piped instance at `piped.video` fetches YouTube videos and streams them to you; your school's filter only sees a request to `piped.video`, which hasn't been added to the blocklist yet. The catch is that as these alternatives become popular, they get blocked too. Check back for updated links, or use a proxy from the [Proxies](/resources/proxies) page as a fallback.
+
+<Tip>
+  If an alternative site gets blocked mid-session, try its **Google Translate link**: prefix the URL with `https://translate.google.com/translate?u=` and Google's translation proxy will fetch it for you. Similarly, **Wayback Machine cached versions** at web.archive.org can sometimes load content from blocked domains.
+</Tip>
+
+## Alternative Links by Service
+
+<AccordionGroup>
+  <Accordion title="YouTube">
+    **Piped** — An open-source YouTube frontend with no ads and no tracking. Many community-hosted instances are available.
+
+    - [piped.video](https://piped.video/)
+    - [piped.kavin.rocks](https://piped.kavin.rocks/)
+
+    Full instance list: [github.com/TeamPiped/Piped/wiki/Instances](https://github.com/TeamPiped/Piped/wiki/Instances)
+
+    | Instance | API URL | Location |
+    | -------- | ------- | -------- |
+    | kavin.rocks (Official) | pipedapi.kavin.rocks | 🇺🇸 🇮🇳 🇳🇱 🇨🇦 🇬🇧 🇫🇷 |
+    | leptons.xyz | pipedapi.leptons.xyz | 🇦🇹 |
+    | nosebs.ru | pipedapi.nosebs.ru | 🇫🇮 |
+    | privacy.com.de | piped-api.privacy.com.de | 🇩🇪 |
+    | adminforge.de | pipedapi.adminforge.de | 🇩🇪 |
+    | piped.yt | api.piped.yt | 🇩🇪 |
+    | drgns.space | pipedapi.drgns.space | 🇺🇸 |
+    | owo.si | pipedapi.owo.si | 🇩🇪 |
+    | ducks.party | pipedapi.ducks.party | 🇳🇱 |
+    | private.coffee | api.piped.private.coffee | 🇦🇹 |
+
+    ---
+
+    **Invidious** — Another open-source YouTube frontend, older and very widely hosted.
+
+    Full instance list: [docs.invidious.io/instances](https://docs.invidious.io/instances/)
+
+    - https://inv.in.projectsegfau.lt 🇮🇳
+    - https://inv.nadeko.net 🇨🇱
+    - https://inv.tux.pizza 🇺🇸
+    - https://inv.us.projectsegfau.lt 🇺🇸
+    - https://invidious.darkness.services 🇺🇸
+    - https://invidious.einfachzocken.eu 🇩🇪
+    - https://invidious.fdn.fr 🇫🇷
+    - https://invidious.flokinet.to 🇷🇴
+    - https://invidious.jing.rocks 🇯🇵
+    - https://invidious.lunar.icu 🇩🇪
+    - https://invidious.privacydev.net 🇫🇷
+    - https://invidious.privacyredirect.com 🇫🇮
+    - https://invidious.private.coffee 🇦🇹
+    - https://yewtu.be 🇩🇪
+    - https://yt.artemislena.eu 🇩🇪
+    - https://yt.cdaut.de 🇩🇪
+
+    ---
+
+    **Other alternatives:**
+    - [clipzag.com](https://clipzag.com/) — Clean YouTube viewer
+    - [video.link](https://video.link/) — Simple redirect-based viewer
+    - [yout-ube.com](https://yout-ube.com) — Hyphenated domain trick
+    - [michael.team/yt/](https://michael.team/yt/) — Minimal YouTube interface
+  </Accordion>
+
+  <Accordion title="YouTube Music">
+    YouTube Music (YT Music) streams music similarly to Spotify. When it's blocked, these privacy-friendly frontends serve the same audio.
+
+    **BeatBump**
+    - [beatbump.io](https://beatbump.io/)
+
+    **HyperPipe**
+    - [hyperpipe.surge.sh](https://hyperpipe.surge.sh/)
+  </Accordion>
+
+  <Accordion title="Google Search">
+    When Google Search is blocked, any of these privacy-respecting search engines can replace it. Most return similar results by aggregating from multiple sources.
+
+    **SearXNG** — A self-hostable meta-search engine. Find a full list of public instances at [searx.space](https://searx.space/).
+
+    Selected instances:
+    - https://search.rhscz.eu/
+    - https://searx.hu/
+    - https://searx.tiekoetter.com/
+    - https://priv.au/
+    - https://search.inetol.net/
+    - https://search.indst.eu/
+    - https://searx.catfluori.de/
+    - https://searxng.ca/
+    - https://search.sapti.me/
+    - https://opnxng.com/
+    - https://search.projectsegfau.lt/
+    - https://searx.techsaviours.org/
+    - https://ooglester.com/
+    - https://searx.work/
+    - https://baresearch.org/
+    - https://xo.wtf/
+    - https://search.nerdvpn.de/
+    - https://searx.perennialte.ch/
+    - https://skyrimhater.com/
+    - https://paulgo.io/
+    - https://searx.ari.lt/
+    - https://searxng.ch/
+    - https://etsi.me/
+    - https://search.nadeko.net/
+    - https://searx.be/
+    - https://northboot.xyz/
+
+    **Whoogle** — Fetches Google results with no ads or tracking:
+    - [search.sethforprivacy.com](https://search.sethforprivacy.com/)
+    - [whoogle.lunar.icu](https://whoogle.lunar.icu/)
+
+    **Other search engines:**
+    - [search.brave.com](https://search.brave.com/) — Brave Search
+    - [ghosterysearch.com](https://ghosterysearch.com/) — Ghostery/Cliqz
+    - [ecosia.org](https://ecosia.org/) — Ecosia (plants trees)
+    - [metager.org](https://metager.org/) — MetaGer
+    - [www.mojeek.com](https://www.mojeek.com/) — Mojeek (independent index)
+    - [search.disconnect.me](https://search.disconnect.me/) — Disconnect
+    - [www.onesearch.com](https://www.onesearch.com/) — OneSearch
+    - [www.dogpile.com/texis/search](https://www.dogpile.com/texis/search) — Dogpile
+    - [wiki.com](https://wiki.com/) — Wiki search
+    - [boardreader.com](https://boardreader.com/) — Forum search
+    - [searchcode.com](https://searchcode.com/) — Code search
+    - [search.carrot2.org](https://search.carrot2.org/#/search/web) — Carrot2
+    - [www.metacrawler.com](https://www.metacrawler.com/) — MetaCrawler
+    - [www.entireweb.com](https://www.entireweb.com/) — Entireweb
+    - [kagi.com](https://kagi.com/) — Kagi *(account required)*
+    - [www.ask.com](https://www.ask.com/) — Ask
+    - [yacy.searchlab.eu](https://yacy.searchlab.eu/) — YaCy (P2P)
+  </Accordion>
+
+  <Accordion title="Google Workspace (Docs, Sheets, Slides)">
+    Google Workspace tools — Docs, Sheets, Slides, Drive — are sometimes monitored by school IT through admin console policies. These alternatives offer equivalent collaborative document editing with stronger privacy.
+
+    **CryptPad** — End-to-end encrypted collaborative office suite. Find all instances at [cryptpad.org/instances](https://cryptpad.org/instances/).
+
+    | Instance | Location |
+    | -------- | -------- |
+    | [cryptpad.fr](https://cryptpad.fr) | 🇫🇷 France — Official flagship |
+    | [pad.envs.net](https://pad.envs.net) | 🇩🇪 Germany |
+    | [cryptpad.piratenpartei.de](https://cryptpad.piratenpartei.de) | 🇩🇪 Germany (Pirate Party) |
+    | [notes.dunst.be](https://notes.dunst.be) | 🇩🇪 Germany |
+    | [cryptpad.disroot.org](https://cryptpad.disroot.org) | 🇳🇱 Netherlands |
+    | [cryptpad.malacher.fr](https://cryptpad.malacher.fr) | 🇫🇷 France |
+    | [cryptpad.piratenpartei-bw.de](https://cryptpad.piratenpartei-bw.de) | 🇩🇪 Germany |
+    | [cryptpad.bolha.tools](https://cryptpad.bolha.tools) | 🇨🇦 Canada / 🇧🇷 Brazil |
+    | [cryptpad.private.coffee](https://cryptpad.private.coffee) | 🇦🇹 Austria |
+  </Accordion>
+
+  <Accordion title="Reddit">
+    Reddit's front page and comment threads are accessible through privacy-friendly frontends that don't require an account and aren't served from `reddit.com`.
+
+    **LibReddit / Redlib** — Open-source Reddit frontends. Instance lists:
+    - [github.com/libreddit/libreddit-instances](https://github.com/libreddit/libreddit-instances/blob/master/instances.md)
+    - [github.com/redlib-org/redlib-instances](https://github.com/redlib-org/redlib-instances/blob/main/instances.md)
+
+    Working instances:
+    - [lr.vern.cc](https://lr.vern.cc) 🇺🇸
+    - [discuss.whatever.social](https://discuss.whatever.social) 🇺🇸
+    - [redlib.perennialte.ch](https://redlib.perennialte.ch) 🇦🇺
+    - [red.artemislena.eu](https://red.artemislena.eu) 🇩🇪
+    - [redlib.privacyredirect.com](https://redlib.privacyredirect.com) 🇫🇮
+    - [redlib.baczek.me](https://redlib.baczek.me) 🇵🇱
+    - [redlib.4o1x5.dev](https://redlib.4o1x5.dev) 🇭🇺
+    - [reddit.adminforge.de](https://reddit.adminforge.de) 🇩🇪
+    - [redlib.thebunny.zone](https://redlib.thebunny.zone) 🇭🇷
+    - [redlib.privadency.com](https://redlib.privadency.com) 🇩🇪
+    - [libreddit.kavin.rocks](https://libreddit.kavin.rocks) 🇮🇳
+    - [libreddit.projectsegfau.lt](https://libreddit.projectsegfau.lt) 🇱🇺
+    - [redlib.catsarch.com](https://redlib.catsarch.com/) 🇺🇸
+  </Accordion>
+
+  <Accordion title="GitHub">
+    GitHub's web interface can be accessed through GotHub, a privacy-friendly open-source frontend.
+
+    **GotHub** instances:
+
+    | Domain | Country | ISP |
+    | ------ | ------- | --- |
+    | [gothub.lunar.icu](https://gothub.lunar.icu) | 🇩🇪 Germany | Avoro |
+    | [gh.owo.si](https://gh.owo.si) | 🇩🇪 Germany | Contabo |
+    | [gothub.r4fo.com](https://gothub.r4fo.com) | 🇳🇱 Netherlands | Oracle |
+    | [gothub.dev.projectsegfau.lt](https://gothub.dev.projectsegfau.lt) | 🇮🇳 India | Airtel |
+    | [gh.phreedom.club](https://gh.phreedom.club) | 🇮🇸 Iceland | Flokinet |
+    | [gothub.ducks.party](https://gothub.ducks.party) | 🇳🇱 Netherlands | Timeweb |
+    | [gothub.projectsegfau.lt](https://gothub.projectsegfau.lt) | GeoDNS (DE/US/IN) | Avoro/Racknerd |
+    | [gothub.hyperreal.coffee](https://gothub.hyperreal.coffee) | 🇺🇸 USA | Linode |
+    | [g.opnxng.com](https://g.opnxng.com) | 🇸🇬 Singapore | Vultr |
+  </Accordion>
+
+  <Accordion title="Wikipedia">
+    Wikipedia content is available through Wikiless, a privacy-respecting frontend.
+
+    **Wikiless** — Main instance and mirrors:
+    - [wikiless.com](https://wikiless.com/)
+    - [wikiless.tiekoetter.com](https://wikiless.tiekoetter.com) 🇩🇪 — Netcup
+    - [wiki.nerdvpn.de](https://wiki.nerdvpn.de) 🇺🇦 — Virtual Systems
+    - [wikiless.v4nt.com](https://wikiless.v4nt.com) — Cloudflare-protected
+
+    Full instance list: [github.com/Metastem/wikiless/wiki/Instances](https://github.com/Metastem/wikiless/wiki/Instances)
+  </Accordion>
+
+  <Accordion title="Scratch">
+    Scratch projects can be run and edited through TurboWarp, which is faster than the official Scratch runtime and has additional features.
+
+    **TurboWarp** — Official mirrors:
+    - [turbowarp.org](https://turbowarp.org/) — Main site
+    - [mirror.turbowarp.xyz](https://mirror.turbowarp.xyz/) — Community mirror
+    - [staging.turbowarp.org](https://staging.turbowarp.org/) — Staging mirror
+
+    Self-host your own mirror: [github.com/TurboWarp/mirror](https://github.com/TurboWarp/mirror)
+
+    **PenguinMod** — TurboWarp-based with additional mod blocks and features:
+    - [studio.penguinmod.com](https://studio.penguinmod.com/)
+  </Accordion>
+
+  <Accordion title="StackOverflow">
+    StackOverflow questions and answers are accessible through AnonymousOverflow, which strips tracking and doesn't require an account.
+
+    **AnonymousOverflow** instances:
+    - [code.whatever.social](https://code.whatever.social/)
+    - [overflow.smnz.de](https://overflow.smnz.de/)
+    - [overflow.adminforge.de](https://overflow.adminforge.de/)
+    - [overflow.hostux.net](https://overflow.hostux.net/)
+    - [overflow.projectsegfau.lt](https://overflow.projectsegfau.lt/)
+  </Accordion>
+
+  <Accordion title="TikTok">
+    TikTok videos can be browsed without an account using ProxiTok, a lightweight open-source frontend.
+
+    **ProxiTok** instances:
+    - [proxitok.pussthecat.org](https://proxitok.pussthecat.org)
+    - [tok.artemislena.eu](https://tok.artemislena.eu)
+  </Accordion>
+
+  <Accordion title="Twitter (X)">
+    Twitter/X content (tweets, profiles, threads) is available through Nitter, a privacy-friendly frontend that requires no account.
+
+    **Nitter** — Main instance and mirrors. Full list and uptime status:
+    - [github.com/zedeus/nitter/wiki/Instances](https://github.com/zedeus/nitter/wiki/Instances)
+    - Uptime checker: [status.d420.de](https://status.d420.de/)
+
+    Working instances:
+    - [xcancel.com](https://xcancel.com) 🇺🇸
+    - [nitter.poast.org](https://nitter.poast.org) 🇺🇸
+    - [nitter.privacyredirect.com](https://nitter.privacyredirect.com) 🇫🇮
+    - [lightbrd.com](https://lightbrd.com) 🇹🇷 *(NSFW enabled)*
+    - [nitter.space](https://nitter.space) 🇺🇸
+    - [nitter.tiekoetter.com](https://nitter.tiekoetter.com) 🇩🇪
+    - [nuku.trabun.org](https://nuku.trabun.org) 🇨🇱
+
+    **Twiiit** — Randomly picks a working Nitter instance for you:
+    - [twiiit.com](https://twiiit.com/)
+  </Accordion>
+
+  <Accordion title="Fandom (Wikis)">
+    Fandom wiki pages are accessible through BreezeWiki, which strips the heavy ad-laden layout and shows a clean, readable version of the wiki content.
+
+    **BreezeWiki** instances:
+
+    | Hoster | Link |
+    | ------ | ---- |
+    | Cadence | [breezewiki.com](https://breezewiki.com) |
+    | Artemis Everfree | [antifandom.com](https://antifandom.com) |
+    | PussTheCat.org | [breezewiki.pussthecat.org](https://breezewiki.pussthecat.org) |
+    | Kevin Payravi | [bw.hamstro.dev](https://bw.hamstro.dev) |
+    | Project Segfault | [bw.projectsegfau.lt](https://bw.projectsegfau.lt) |
+    | Hostux | [breeze.hostux.net](https://breeze.hostux.net) |
+    | Artemis Lena | [bw.artemislena.eu](https://bw.artemislena.eu) |
+    | Frontend Friendly | [breezewiki.frontendfriendly.xyz](https://breezewiki.frontendfriendly.xyz) |
+    | nohost | [breeze.nohost.network](https://breeze.nohost.network) |
+    | Opnxng | [z.opnxng.com](https://z.opnxng.com) |
+    | hyperreal | [breezewiki.hyperreal.coffee](https://breezewiki.hyperreal.coffee) |
+    | Butter Cat | [breezewiki.catsarch.com](https://breezewiki.catsarch.com) |
+    | mint.lgbt | [breeze.mint.lgbt](https://breeze.mint.lgbt) |
+    | untitaker | [breezewiki.woodland.cafe](https://breezewiki.woodland.cafe) |
+    | Fijxu | [breezewiki.nadeko.net](https://breezewiki.nadeko.net) |
+    | AlexPewMaster | [fandom.reallyaweso.me](https://fandom.reallyaweso.me) |
+    | 4o1x5 | [breezewiki.4o1x5.dev](https://breezewiki.4o1x5.dev) |
+    | Rafo | [breezewiki.r4fo.com](https://breezewiki.r4fo.com/) |
+    | Private.coffee | [breezewiki.private.coffee](https://breezewiki.private.coffee) |
+    | Nune | [fan.blitzw.in](https://fan.blitzw.in) |
+  </Accordion>
+</AccordionGroup>
+
+## Google Sites Hubs
+
+Google Sites (`sites.google.com`) is typically whitelisted by school IT departments because it's a Google product used for legitimate school projects. Savvy students have exploited this by building unblocker hubs — pages that embed games or link to proxies — hosted directly on Google Sites, where blocking the URL would also break legitimate classroom pages.
+
+<CardGroup cols={2}>
+  <Card title="3X Potatoes" icon="potato" href="https://sites.google.com/view/tripplethepotatoes/home">
+    A Google Sites hub with game and tool links.
+  </Card>
+  <Card title="Master Edition" icon="crown" href="https://sites.google.com/view/master-editionn/home">
+    A curated hub hosted on Google Sites.
+  </Card>
+  <Card title="Limelock" icon="lock" href="https://sites.google.com/view/limelock/home">
+    A Google Sites hub with unblocked content.
+  </Card>
+  <Card title="Game Blitz" icon="gamepad" href="https://sites.google.com/view/www-clever-com/home">
+    Game Blitz — a Google Sites hub disguised as a Clever portal.
+  </Card>
+</CardGroup>
+
+Additional Google Sites-based proxy hubs can be found in the NettleWeb/WhiteSpider section of the [Mixes](/resources/mixes) page, which lists many `sites.google.com/view/` URLs that host the WhiteSpider unblocker.
+
+## FMHY — Free Media for Heck Yeah
+
+[FMHY](https://fmhy.net/) is a comprehensive community-maintained wiki of free media resources, tools, and alternative frontends covering far more services than this repository tracks. It's an excellent starting point if you're looking for an alternative to any specific site.
+
+Mirror instances of FMHY itself (in case the main domain is blocked):
+- [fmhyclone.pages.dev](https://fmhyclone.pages.dev/)
+- [fmhy.pages.dev](https://fmhy.pages.dev/)
+- [fmhy.bid](https://fmhy.bid/)
+- [fmhy.samidy.com](https://fmhy.samidy.com/)
+- [fmhy.jbugel.xyz](https://fmhy.jbugel.xyz/)
+- [a-fmhy.pages.dev](https://a-fmhy.pages.dev/)
+- [fmhy.artistgrid.cx](https://fmhy.artistgrid.cx/)
+- [fmhy.blooketbot.me](https://fmhy.blooketbot.me/)
+- [fmhy.monochrome.tf](https://fmhy.monochrome.tf/)
+- [fmhy.pp.ua](https://fmhy.pp.ua/)
+- [fmhy.prigoana.com](https://fmhy.prigoana.com/)

