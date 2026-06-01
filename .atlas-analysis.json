@@ -1,23 +1,11 @@
 {
-  "$schema": "https://mintlify.com/docs.json",
-  "name": "Chromebook Utilities",
+  "projectType": "general",
+  "projectName": "Chromebook Utilities",
+  "projectDescription": "A curated collection of exploits, bypasses, proxies, cheats, and tools for managed/enrolled Chromebooks used in school or enterprise environments.",
   "theme": "aspen",
-  "colors": {
-    "primary": "#2563eb",
-    "light": "#3b82f6",
-    "dark": "#1d4ed8"
-  },
-  "navbar": {
-    "primary": {
-      "type": "github",
-      "href": "https://github.com/S-PScripts/chromebook-utilities"
-    }
-  },
-  "footer": {
-    "socials": {
-      "github": "https://github.com/S-PScripts/chromebook-utilities"
-    }
-  },
+  "primaryColor": "#2563eb",
+  "lightColor": "#3b82f6",
+  "darkColor": "#1d4ed8",
   "navigation": {
     "tabs": [
       {
@@ -112,5 +100,34 @@
         ]
       }
     ]
-  }
+  },
+  "keyFeatures": [
+    "ChromeOS developer mode and unenrollment exploits (Sh1mmer, BadRecovery, FORGE, etc.)",
+    "Extension and monitoring bypass tools (GoGuardian, Securly, Hapara, iBoss)",
+    "Chrome Auto Update Blocker (CAUB) to maintain specific ChromeOS versions",
+    "Network filter bypasses via custom DNS and VPN exploits",
+    "Skiovox kiosk app file manager breakout (works on v118 through v144)",
+    "Webview exploits to access unmanaged browser contexts",
+    "Collection of proxy/unblocker links (Rammerhead, Hypertabs, Scramjet, etc.)",
+    "Game cheats for Blooket, Edpuzzle, Gimkit, Kahoot, Quizlet, and more",
+    "Web OS environments and in-browser virtual machines",
+    "Alternative links for commonly blocked sites (YouTube, Reddit, GitHub, etc.)",
+    "Tutorials for hosting proxies via Vercel, FreeDNS, and BYOD"
+  ],
+  "publicApiSurface": [
+    "Developer Mode (Power + Refresh + Escape → Ctrl+D)",
+    "Unenrollment exploits: Sh1mmer, BadRecovery, FORGE, Quicksilver, Deenterprise, BR1CK",
+    "CAUB (Chrome Auto Update Blocker) via ONC file import at chrome://network",
+    "Skiovox kiosk breakout (v118–v144) via Certificates → File Manager",
+    "GoGuardian Hard Disable (XSS via blocked.goguardian.com cookie overflow)",
+    "GoGuardian Tab/Lock bypasses, Securly Killcurly 1/2/3, Hapara Focus bypass",
+    "Network Filter Bypass via custom DNS (8.8.8.8 / 1.1.1.1)",
+    "LTBEEF / LTMEAT service worker extension disable exploits",
+    "Webview exploits: Chrome-Signin, TestNav, Edcite, Edulastic, College Board",
+    "Proxies: Rammerhead, Hypertabs, Scramjet, Page Sandbox",
+    "Bookmarklet runners: AdGuard, Sh0vel, Point-Blank, uBlock-based",
+    "JavaScript Executor and Tab Disguiser utilities",
+    "Web OS: AnuraOS, AaronOS, TerraOS, Windows 10/11 in browser, Codespaces VM",
+    "Game cheats: Blooket, Edpuzzle, Gimkit, Kahoot, Quizlet, Wayground/Quizizz"
+  ]
 }
